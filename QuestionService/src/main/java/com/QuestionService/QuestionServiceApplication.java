@@ -2,14 +2,6 @@ package com.QuestionService;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-//import org.springframework.boot.autoconfigure.domain.EntityScan;
-//import org.springframework.context.annotation.ComponentScan;
-
-
-//@EnableJpaRepositories(basePackages = "com.QuestionService.QuestionService.repositories")
-//@EntityScan(basePackages = "com.QuestionService.QuestionService.entities")
-//@EnableJpaRepositories(basePackages = "com.QuestionService.QuestionService.repositories")
-//@ComponentScan(basePackages = "com.QuestionService.QuestionService")
 
 @SpringBootApplication
 //@EnableJpaRepositories(basePackages = "com.QuestionService.QuestionService.repositories")

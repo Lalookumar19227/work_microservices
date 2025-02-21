@@ -9,7 +9,7 @@ public class UsersApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(UsersApplication.class, args);
 
-		System.out.println("helloo   ApiGateway");
+		System.out.println("helloo  Userrrrrrr  ApiGateway");
 
 	}
 
