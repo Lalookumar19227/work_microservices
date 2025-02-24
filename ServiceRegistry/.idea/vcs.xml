@@ -5,5 +5,6 @@
     <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../ApiGateway" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../QuestionService" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../UserService/jwtttt/jwt-apigateway-security" vcs="Git" />
   </component>
 </project>

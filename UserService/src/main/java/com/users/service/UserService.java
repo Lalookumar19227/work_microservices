@@ -2,11 +2,13 @@ package com.users.service;
 
 import com.users.entities.Users;
 
+import java.util.List;
+
 public interface UserService {
 
     Users createUser(Users user);
 
-//    List<User> getAllUsers();
+    List<Users> getAllUsers();
 //
 //    Optional<User> getUserById(Long id);
 //

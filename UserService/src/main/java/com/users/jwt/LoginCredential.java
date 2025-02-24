@@ -1,8 +1,9 @@
 package com.users.jwt;
 
-
+//import com.FullFledgedEcommerce.entites.User;
+//import com.FullFledgedEcommerce.repo.UserRepo;
+import com.users.UserRepo.UserRepo;
 import com.users.entities.Users;
-import com.users.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,23 +18,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 public class LoginCredential {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
 
-    @Autowired
-    private UserRepo userRepo;
-
-    @Autowired
-    private JwtService jwtService;
-
-
-    @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@RequestBody Users user) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
-        String email = user.getEmail();
-        Users user1 = userRepo.getUserByEmail(email);
-        String role =  user1.getRole().name();
-        String token = jwtService.generateToken(email, role);
-        return ResponseEntity.ok(token);
-    }
 }

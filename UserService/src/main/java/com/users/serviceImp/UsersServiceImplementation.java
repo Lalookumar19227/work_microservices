@@ -1,16 +1,21 @@
 package com.users.serviceImp;
 
 import com.users.entities.Users;
-import com.users.repo.UserRepo;
+import com.users.UserRepo.UserRepo;
 import com.users.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class UsersServiceImplementation implements UserService {
-
+    @Override
+    public List<Users> getAllUsers() {
+        return userRepo.findAll();
+    }
 //    @Autowired
 //    private RestTemplate restTemplate;
 
@@ -28,10 +33,7 @@ public class UsersServiceImplementation implements UserService {
         return userRepo.save(user);
     }
 
-//    @Override
-//    public List<Users> getAllUserss() {
-//       return userRepo.findAll();
-//    }
+
 //
 //    @Override
 //    public Users getUsersByEmail(String email) {

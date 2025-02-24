@@ -17,6 +17,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import javax.crypto.spec.SecretKeySpec;
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -24,17 +26,14 @@ public class Config {
 
     @Bean
     @Primary
-    public MyUserDetailsService myUserDetailsService() {
-        return new MyUserDetailsService();
+    public com.FullFledgedEcommerce.JWT.MyUserDetailsService myUserDetailsService() {
+        return new com.FullFledgedEcommerce.JWT.MyUserDetailsService();
     }
 
     @Bean
     public JwtFilter jwtFilter() {
         return new JwtFilter();
     }
-
-
-
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -53,7 +52,7 @@ public class Config {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable);
         http.authorizeHttpRequests(request -> request
-                        .requestMatchers("/auth/**","/users/**")
+                        .requestMatchers("/auth/**,/quiz/**")
                         .permitAll()
                         .anyRequest()
                         .authenticated())
