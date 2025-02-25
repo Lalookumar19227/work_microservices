@@ -52,7 +52,7 @@ public class Config {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable);
         http.authorizeHttpRequests(request -> request
-                        .requestMatchers("/auth/**,/quiz/**")
+                        .requestMatchers("/auth/**","/quiz/**")
                         .permitAll()
                         .anyRequest()
                         .authenticated())

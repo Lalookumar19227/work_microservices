@@ -12,6 +12,7 @@ import java.util.List;
 
 @Service
 public class UsersServiceImplementation implements UserService {
+
     @Override
     public List<Users> getAllUsers() {
         return userRepo.findAll();
@@ -34,7 +35,7 @@ public class UsersServiceImplementation implements UserService {
     }
 
 
-//
+
 //    @Override
 //    public Users getUsersByEmail(String email) {
 //      return userRepo.getUsersByEmail(email);
