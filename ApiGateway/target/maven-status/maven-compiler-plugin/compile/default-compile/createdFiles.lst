@@ -1,1 +1,6 @@
-com\gatway\ApiGatewayApplication.class
+com\gatway\filter\AuthenticationFilter$Config.class
+com\gatway\filter\AuthenticationFilter.class
+com\gatway\util\JwtUtil.class
+com\gatway\config\AppConfig.class
+com\gatway\validators\RouteValidator.class
+com\gatway\GatewayApplication.class

@@ -1,7 +1,7 @@
-//package filter;  // ✅ Ensure it matches the correct package structure
 package com.gatway.filter;
 
 import com.gatway.util.JwtUtil;
+import com.gatway.validators.RouteValidator;
 import org.apache.http.HttpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
@@ -10,10 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
-//import util.JwtUtil;
-import com.gatway.validators.RouteValidator;
-//import com.gateway.util.JwtUtil;
-//import com.gateway.validators.RouteValidator;
 
 import java.util.logging.Logger;
 
@@ -23,7 +19,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
     private static final Logger logger = Logger.getLogger(AuthenticationFilter.class.getName());
 
     @Autowired
-    private RouteValidator.RouteValidator validator;
+    private RouteValidator validator;
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -42,17 +38,17 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                 }
 
                 String authHeader = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
-                logger.info("Forwarded Authorization Header: " + authHeader);
+                logger.info("Received Authorization Header: " + authHeader);
 
-                if (authHeader != null && authHeader.startsWith("Bearer ")) {
-                    authHeader = authHeader.substring(7);
-                } else {
-                    logger.warning("Authorization header does not start with 'Bearer '");
+                if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+                    logger.warning("Invalid Authorization header format");
                     return setUnauthorizedResponse(exchange, "Authorization header must start with 'Bearer '");
                 }
 
+                String token = authHeader.substring(7);
+
                 try {
-                    jwtUtil.validateToken(authHeader);
+                    jwtUtil.validateToken(token);
                 } catch (Exception e) {
                     logger.severe("Invalid Token: " + e.getMessage());
                     return setUnauthorizedResponse(exchange, "Invalid Token");
@@ -63,6 +59,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
     }
 
     private Mono<Void> setUnauthorizedResponse(ServerWebExchange exchange, String message) {
+        logger.warning("Unauthorized access: " + message);
         exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
         return exchange.getResponse().setComplete();
     }
